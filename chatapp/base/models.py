@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 
 from django.contrib.postgres.fields import ArrayField
@@ -5,6 +6,7 @@ from django.contrib.postgres.fields import ArrayField
 # Create your models here.
 class UserModel(models.Model):
     #host=
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)
     profileImageBase64 = models.TextField(null=True, blank=True)
     email = models.CharField(max_length=200,default="")
     name = models.CharField(max_length=200,default="")
@@ -17,6 +19,7 @@ class UserModel(models.Model):
         return self.name
 
 class MessageRoomModel(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     users = ArrayField(models.CharField(max_length=200,null=True, blank=True,default=""),default=list)
     roomName = models.CharField(max_length=200,default="")
     lastMessageId = models.CharField(max_length=200,null=True, blank=True,default="")
@@ -28,6 +31,7 @@ class MessageRoomModel(models.Model):
             return self.roomName
 
 class MessageModel(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     senderId = models.CharField(max_length=200,default="")
     readers = ArrayField(models.CharField(max_length=200,null=True, blank=True,default=""),default=list)
     message = models.CharField(max_length=200,default="")

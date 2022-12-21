@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import *
 # Create your views here.
 
 roomList = [
@@ -6,6 +7,11 @@ roomList = [
     {'id':2, 'name': 'room name 2'},
     {'id':3, 'name': 'room name 3'},
 ]
+
+def users(request):
+    users = UserModel.objects.all()
+    context = {'users': users}
+    return render(request, 'base/users.html', context )
 
 def home(request):
     context = {'rooms': roomList}

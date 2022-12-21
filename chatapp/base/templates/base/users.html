@@ -1,0 +1,13 @@
+<div>
+    <div>
+        {% for user in users %}
+        <div>
+            <h5>
+                {{user.id}} - 
+                <img width="64" height="64" src="{{user.profileImageBase64}}"  style="border-radius: 100%;"/>
+                {{user.name}} 
+            </h5>
+        </div>
+        {% endfor %}
+    </div>
+</div>
